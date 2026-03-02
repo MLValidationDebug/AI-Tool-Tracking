@@ -32,7 +32,7 @@ _DARK_LAYOUT: dict[str, Any] = dict(
     template="plotly_dark",
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="#1e2433",
-    font=dict(color="#c8cdd5", size=13),
+    font=dict(color="#c8cdd5", size=11),
 )
 
 RATE_COLORS = {"Adoption Rate": "#6EE7B7", "Active Rate": "#FBBF24"}
@@ -138,19 +138,19 @@ def _make_rate_chart(
             marker=dict(size=7, color=color),
             text=[f"{v:.1%}" if pd.notna(v) else "" for v in y_list],
             textposition="top center",
-            textfont=dict(size=12, color=color),
+            textfont=dict(size=10, color=color),
             connectgaps=True,
         ))
 
     fig.update_layout(
-        title=dict(text=tool, x=0.5, font=dict(size=18)),
+        title=dict(text=tool, x=0.5, font=dict(size=15)),
         yaxis=dict(tickformat=".0%", gridcolor="rgba(255,255,255,0.06)",
                    title=None, range=[0, 1]),
         xaxis=dict(gridcolor="rgba(255,255,255,0.06)", title=None, type="category"),
         height=CHART_HEIGHT,
         hovermode="x unified",
         legend=dict(orientation="h", yanchor="bottom", y=1.02,
-                    xanchor="center", x=0.5, font=dict(size=12)),
+                    xanchor="center", x=0.5, font=dict(size=10)),
         margin=dict(t=60, b=36, l=48, r=16),
         **_DARK_LAYOUT,
     )
@@ -193,7 +193,7 @@ def _make_actions_chart(
         marker_color=_hex_to_rgba(c1, 0.75),
         text=[f"{v:,.0f}" if pd.notna(v) else "" for v in total_acts],
         textposition="outside",
-        textfont=dict(size=11, color=c1),
+        textfont=dict(size=9, color=c1),
         offsetgroup="total_actions",
         yaxis="y",
     ))
@@ -205,20 +205,20 @@ def _make_actions_chart(
         marker_color=_hex_to_rgba(c2, 0.75),
         text=[f"{v:.1f}" if pd.notna(v) else "" for v in avg_acts],
         textposition="outside",
-        textfont=dict(size=12, color=c2),
+        textfont=dict(size=10, color=c2),
         offsetgroup="avg_actions",
         yaxis="y2",
     ))
 
     fig.update_layout(
-        title=dict(text="Copilot Actions", x=0.5, font=dict(size=18)),
+        title=dict(text="Copilot Actions", x=0.5, font=dict(size=15)),
         yaxis=dict(
-            title=dict(text="Total Actions", font=dict(size=12, color=c1)),
+            title=dict(text="Total Actions", font=dict(size=10, color=c1)),
             gridcolor="rgba(255,255,255,0.06)",
             tickfont=dict(color=c1),
         ),
         yaxis2=dict(
-            title=dict(text="Avg Action/User", font=dict(size=12, color=c2)),
+            title=dict(text="Avg Action/User", font=dict(size=10, color=c2)),
             overlaying="y", side="right",
             gridcolor="rgba(255,255,255,0.0)",
             tickfont=dict(color=c2),
@@ -228,7 +228,7 @@ def _make_actions_chart(
         height=CHART_HEIGHT,
         hovermode="x unified",
         legend=dict(orientation="h", yanchor="bottom", y=1.02,
-                    xanchor="center", x=0.5, font=dict(size=12)),
+                    xanchor="center", x=0.5, font=dict(size=10)),
         margin=dict(t=60, b=36, l=56, r=56),
         barmode="group",
         bargap=0.25,
@@ -369,8 +369,8 @@ def _write_dashboard(
     background: linear-gradient(135deg, #161b26 0%, #1a2236 100%);
     border: 1px solid #262d3d; border-radius: 12px; color: #e4e8ef;
   }}
-  .header h1 {{ margin: 0 0 6px; font-size: 1.55rem; font-weight: 600; letter-spacing: -.02em; }}
-  .header .meta {{ color: rgba(200,210,225,.6); font-size: .84rem; margin: 0; }}
+  .header h1 {{ margin: 0 0 6px; font-size: 1.35rem; font-weight: 600; letter-spacing: -.02em; }}
+  .header .meta {{ color: rgba(200,210,225,.6); font-size: .76rem; margin: 0; }}
   .header .meta span {{
     display: inline-block; background: rgba(255,255,255,.07);
     padding: 2px 10px; border-radius: 4px; margin-right: 6px;
@@ -382,21 +382,21 @@ def _write_dashboard(
     background: #161b26; border: 1px solid #262d3d;
     padding: 16px 24px; border-radius: 10px;
   }}
-  .toc h2 {{ margin: 0 0 8px; font-size: 1rem; color: #8b95a5; }}
+  .toc h2 {{ margin: 0 0 8px; font-size: .88rem; color: #8b95a5; }}
   .toc ul {{ margin: 0; padding-left: 16px; columns: 3; column-gap: 28px; }}
-  .toc li {{ margin: 3px 0; break-inside: avoid; font-size: .85rem; }}
+  .toc li {{ margin: 3px 0; break-inside: avoid; font-size: .76rem; }}
   .toc a {{ color: #7aa2f7; text-decoration: none; }}
   .toc a:hover {{ text-decoration: underline; }}
 
   /* sections */
   .section {{ max-width: 1500px; margin: 0 auto 32px; }}
   .section-hdr {{
-    font-size: 1.15rem; font-weight: 600; color: #e4e8ef;
+    font-size: 1rem; font-weight: 600; color: #e4e8ef;
     margin: 0 0 12px; padding-bottom: 6px;
     border-bottom: 1px solid #2a3144;
   }}
   .metric-label {{
-    font-size: .82rem; font-weight: 600; text-transform: uppercase;
+    font-size: .72rem; font-weight: 600; text-transform: uppercase;
     letter-spacing: .06em; color: #6b7280; margin: 0 0 8px;
   }}
 
@@ -416,10 +416,10 @@ def _write_dashboard(
     padding: 8px 14px 4px;
   }}
   .tool-badge {{
-    font-size: .7rem; font-weight: 700; color: #fff;
+    font-size: .62rem; font-weight: 700; color: #fff;
     padding: 2px 10px; border-radius: 4px; letter-spacing: .03em;
   }}
-  .ext {{ color: #7aa2f7; text-decoration: none; font-size: .78rem; }}
+  .ext {{ color: #7aa2f7; text-decoration: none; font-size: .7rem; }}
   .ext:hover {{ text-decoration: underline; }}
   .card-chart {{ padding: 0 4px 4px; }}
   .card-chart .plotly-graph-div {{
